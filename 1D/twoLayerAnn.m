@@ -1,4 +1,4 @@
-function  [Wkj, Wji] = twoLayerAnn(features, targets, noHidden, iter)
+function  [Wkj, Wji, y] = twoLayerAnn(features, targets, noHidden, iter)
     
     i = size(features, 1);
     j = noHidden;

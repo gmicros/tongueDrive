@@ -18,10 +18,11 @@ for i = 1:size(sensorTestRaw, 2)
     target(ind : ind + obs(i) - 1) = repmat(sensorTrainRaw(i).target, obs(i), 1);
     ind = ind + obs(i);
 end
-
+target = (target - min(target)) / range(target);
 % sort this stuff so that it look legit
 [target, i] = sort(target);
-input = input(i, :);
+input = zscore(input(i, :));
 
-[Wkj, Wji] = twoLayerAnn(input', target', 10, 1000);
+[Wkj, Wji, y] = twoLayerAnn(input', target', 10, 1000);
 
+plot( (y+0.99)/1.88 ); hold on; plot(target, '-r');
