@@ -22,12 +22,12 @@ function  [Wkj, Wji, y] = twoLayerAnn(features, targets, noHidden, iter)
     for iter = 1:iter
        %% feed forward
        h = [ phi(Wji * x ); 0.9*ones(1, obs) ];
-       y = phi(Wkj * h);
+       y = (Wkj * h);
 
        %% backprop
        err = (d - y);
 
-       delK = alpha * err .* dev(y);
+       delK = alpha * err .* 1;
        delJ = (delK' * Wkj)' .* dev(h);
 
        deltaK = delK * h'; 

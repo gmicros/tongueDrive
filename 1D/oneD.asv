@@ -19,12 +19,10 @@ for i = 1:size(sensorTestRaw, 2)
     ind = ind + obs(i);
 end
 target = (target - min(target)) / range(target);
-% target = 2* (target - min(target) - range(target)/2) / range(target);
 % sort this stuff so that it look legit
 [target, i] = sort(target);
-input = zscore(input(i, :));
-% input = (input(i, :) - min(min(input)))/range(range(input));
+input = (input(i, :) - min(min(input)))/range(input);
 
-[Wkj, Wji, y] = twoLayerAnn(input', target', 20, 5000);
+[Wkj, Wji, y] = twoLayerAnn(input', target', 20, 2000);
 
-plot(y); hold on; plot(2 * target - 1, '-r');
+plot(y); hold on; plot(2*target - 1, '-r');
